@@ -383,8 +383,12 @@ const boardElement = siteMainElement.querySelector(`.board`);
 
 render(taskListElement, createTaskEditTemplate());
 
-for (let i = 0; i < TASK_COUNT; i++) {
-  render(taskListElement, createTaskTemplate());
-}
+// Добавляет список элементов в DOM
+const renderElementsList = (count, container, template, place = `beforeend`) => {
+  for (let i = 0; i < count; i++) {
+    render(container, template, place);
+  }
+};
 
+renderElementsList(TASK_COUNT, taskListElement, createTaskTemplate());
 render(boardElement, createLoadMoreButtonTemplate());
