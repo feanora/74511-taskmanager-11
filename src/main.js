@@ -19,10 +19,11 @@ render(siteHeaderElement, createSiteMenuTemplate());
 render(siteMainElement, createFilterTemplate());
 render(siteMainElement, createBoardTemplate());
 
-const taskListElement = siteMainElement.querySelector(`.board__tasks`);
 const boardElement = siteMainElement.querySelector(`.board`);
+const taskListElement = boardElement.querySelector(`.board__tasks`);
 
-render(boardElement, createSortTemplate());
+
+render(boardElement, createSortTemplate(), `afterbegin`);
 render(taskListElement, createTaskEditTemplate());
 
 const renderElementsList = (count, container, template, place = `beforeend`) => {
