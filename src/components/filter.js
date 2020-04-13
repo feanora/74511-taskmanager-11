@@ -1,5 +1,6 @@
+import {getCheckedValue} from "../util.js";
+
 const CHECKED_FILTER_INDEX = 0;
-const getFilterCheckedValue = (isChecked) => isChecked ? `checked` : ``;
 
 const createFilterMarkup = (filter, isChecked) => {
   const {name, count} = filter;
@@ -9,7 +10,7 @@ const createFilterMarkup = (filter, isChecked) => {
           id="filter__${name}"
           class="filter__input visually-hidden"
           name="filter"
-          ${getFilterCheckedValue(isChecked)}
+          ${getCheckedValue(isChecked)}
         />
         <label for="filter__${name}" class="filter__label">
           ${name} <span class="filter__${name}-count">${count}</span>
