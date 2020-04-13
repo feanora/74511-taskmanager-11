@@ -1,3 +1,9 @@
+export const TasksCount = {
+  ALL: 22,
+  ON_START: 8,
+  BY_BUTTON: 8
+};
+
 export const FILTER_NAMES = [
   `all`,
   `overdue`,
