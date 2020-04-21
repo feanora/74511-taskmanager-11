@@ -4,6 +4,11 @@ export const TasksCount = {
   BY_BUTTON: 8
 };
 
+export const RenderPosition = {
+  AFTERBEGIN: `afterbegin`,
+  BEFOREEDN: `beforeend`
+};
+
 export const FILTER_NAMES = [
   `all`,
   `overdue`,
@@ -42,3 +47,4 @@ export const COLORS = [
   `green`,
   `pink`
 ];
+

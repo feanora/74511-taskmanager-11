@@ -1,4 +1,4 @@
-import {getCheckedValue} from "../util.js";
+import {getCheckedValue, createElement} from "../util.js";
 
 const CHECKED_FILTER_INDEX = 0;
 
@@ -18,7 +18,7 @@ const createFilterMarkup = (filter, isChecked) => {
   );
 };
 
-export const createFilterTemplate = (filters) => {
+const createFilterTemplate = (filters) => {
   const filterMarkup = filters.map((it, i) => createFilterMarkup(it, i === CHECKED_FILTER_INDEX)).join(`\n`);
   return (
     `<section class="main__filter filter container">
@@ -26,3 +26,25 @@ export const createFilterTemplate = (filters) => {
       </section>`
   );
 };
+
+export default class Filter {
+  constructor(filters) {
+    this._filters = filters;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createFilterTemplate(this._filters);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

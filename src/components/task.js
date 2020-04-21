@@ -1,7 +1,7 @@
 import {getTaskBasicInfo} from "./task-edit.js";
-import {getMarkupClass} from "../util.js";
+import {getMarkupClass, createElement} from "../util.js";
 
-export const createTaskTemplate = (task) => {
+const createTaskTemplate = (task) => {
   const {description, color, isArchive, isFavorite} = task;
   const {isExpired, date, time, isRepeatingTask} = getTaskBasicInfo(task);
   return (
@@ -50,3 +50,26 @@ export const createTaskTemplate = (task) => {
     </article>`
   );
 };
+
+export default class Task {
+  constructor(task) {
+    this._task = task;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createTaskTemplate(this._task);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
+

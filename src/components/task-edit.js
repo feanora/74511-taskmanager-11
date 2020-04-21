@@ -1,5 +1,5 @@
 import {DAYS, MONTH_NAMES, COLORS} from "../const";
-import {formatTime, getCheckedValue, getAnswer, getMarkupClass} from "../util.js";
+import {formatTime, getCheckedValue, getAnswer, getMarkupClass, createElement} from "../util.js";
 
 const createColorsMarkup = (colors, currentColor) => {
   return colors.map((color, index) => {
@@ -75,7 +75,7 @@ export const getTaskBasicInfo = (task) => {
   return {isExpired, isDateShowing, date, time, isRepeatingTask};
 };
 
-export const createTaskEditTemplate = (task) => {
+const createTaskEditTemplate = (task) => {
   const {description, repeatingDays, color} = task;
   const {isExpired, isDateShowing, date, time, isRepeatingTask} = getTaskBasicInfo(task);
 
@@ -139,3 +139,25 @@ export const createTaskEditTemplate = (task) => {
     </article>`
   );
 };
+
+export default class TaskEdit {
+  constructor(task) {
+    this._task = task;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createTaskEditTemplate(this._task);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
