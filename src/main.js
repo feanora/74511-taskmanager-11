@@ -7,11 +7,8 @@ import {createTaskEditTemplate} from "./components/task-edit.js";
 import {createLoadMoreButtonTemplate} from "./components/load-more-button.js";
 import {generateFilters} from "./mock/filter.js";
 import {generateTasks} from "./mock/task";
-import {TasksCount} from "./const.js";
-
-const render = (container, template, place = `beforeend`) => {
-  container.insertAdjacentHTML(place, template);
-};
+import {RenderPosition, TasksCount} from "./const.js";
+import {render} from "./util.js";
 
 const siteMainElement = document.querySelector(`.main`);
 const siteHeaderElement = siteMainElement.querySelector(`.main__control`);

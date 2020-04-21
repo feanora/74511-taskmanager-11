@@ -1,3 +1,5 @@
+import {RenderPosition} from "./const.js";
+
 export const getRandomNumber = (max, min = 0) => {
   return Math.round(Math.random() * (max - min) + min);
 };
@@ -36,4 +38,15 @@ export const createElement = (template) => {
   const newElement = document.createElement(`div`);
   newElement.innerHTML = template;
   return newElement.firstChild;
+};
+
+export const render = (container, element, place = `beforeend`) => {
+  switch (place) {
+    case RenderPosition.AFTERBEGIN:
+      container.pretend(element);
+      break;
+    case RenderPosition.BEFOREEDN:
+      container.append(element);
+      break;
+  }
 };
