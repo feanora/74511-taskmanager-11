@@ -31,3 +31,9 @@ export const formatTime = (date) => {
 export const getCheckedValue = (isChecked) => isChecked ? `checked` : ``;
 export const getAnswer = (flag) => flag ? `yes` : `no`;
 export const getMarkupClass = (flag, className) => flag ? className : ``;
+
+export const createElement = (template) => {
+  const newElement = document.createElement(`div`);
+  newElement.innerHTML = template;
+  return newElement.firstChild;
+};
