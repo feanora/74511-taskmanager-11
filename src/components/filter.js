@@ -1,5 +1,5 @@
 import AbstractComponent from "./abstract-component.js";
-import {getCheckedValue} from "../util.js";
+import {getCheckedValue} from "../utils/common.js";
 
 const CHECKED_FILTER_INDEX = 0;
 

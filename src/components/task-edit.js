@@ -1,6 +1,6 @@
 import AbstractComponent from "./abstract-component.js";
 import {DAYS, MONTH_NAMES, COLORS} from "../const";
-import {formatTime, getCheckedValue, getAnswer, getMarkupClass} from "../util.js";
+import {formatTime, getCheckedValue, getAnswer, getMarkupClass} from "../utils/common.js";
 
 const createColorsMarkup = (colors, currentColor) => {
   return colors.map((color, index) => {

@@ -1,6 +1,6 @@
 import AbstractComponent from "./abstract-component.js";
 import {getTaskBasicInfo} from "./task-edit.js";
-import {getMarkupClass} from "../util.js";
+import {getMarkupClass} from "../utils/common.js";
 
 const createTaskTemplate = (task) => {
   const {description, color, isArchive, isFavorite} = task;
