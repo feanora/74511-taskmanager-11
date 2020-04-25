@@ -10,7 +10,7 @@ import SortComponent from "./components/sort.js";
 import {generateFilters} from "./mock/filter.js";
 import {generateTasks} from "./mock/task";
 import {TasksCount} from "./const.js";
-import {render} from "./utils/render.js";
+import {render, replace, remove} from "./utils/render.js";
 
 const renderTask = (taskListElement, task) => {
   const taskComponent = new TaskComponent(task);
@@ -19,11 +19,11 @@ const renderTask = (taskListElement, task) => {
   const editForm = taskEditComponent.getElement().querySelector(`form`);
 
   const replaceTaskToEdit = () => {
-    taskListElement.replaceChild(taskEditComponent.getElement(), taskComponent.getElement());
+    replace(taskListElement, taskEditComponent.getElement(), taskComponent.getElement());
   };
 
   const replaceEditToTask = () => {
-    taskListElement.replaceChild(taskComponent.getElement(), taskEditComponent.getElement());
+    replace(taskListElement, taskComponent.getElement(), taskEditComponent.getElement());
   };
 
   const escKeyDownHandler = (evt) => {
@@ -74,7 +74,7 @@ const renderBoard = (boardComponent, tasks) => {
       renderTask(taskListElement, task);
     });
     if (showingTasksCount >= tasks.length) {
-      loadMoreButtonComponent.getElement().remove();
+      remove(loadMoreButtonComponent.getElement());
       loadMoreButtonComponent.removeElement();
     }
   };
