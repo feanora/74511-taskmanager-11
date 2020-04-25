@@ -14,9 +14,7 @@ import {render, replace, remove} from "./utils/render.js";
 
 const renderTask = (taskListElement, task) => {
   const taskComponent = new TaskComponent(task);
-  const editButton = taskComponent.getElement().querySelector(`.card__btn--edit`);
   const taskEditComponent = new TaskEditComponent(task);
-  const editForm = taskEditComponent.getElement().querySelector(`form`);
 
   const replaceTaskToEdit = () => {
     replace(taskEditComponent, taskComponent);
@@ -33,11 +31,11 @@ const renderTask = (taskListElement, task) => {
       document.removeEventListener(`keydown`, escKeyDownHandler);
     }
   };
-  editButton.addEventListener(`click`, () => {
+  taskComponent.setEditButtonClickHandler(() => {
     replaceTaskToEdit();
     document.addEventListener(`keydown`, escKeyDownHandler);
   });
-  editForm.addEventListener(`submit`, (evt) => {
+  taskEditComponent.setSubmitHandler((evt) => {
     evt.preventDefault();
     replaceEditToTask();
     document.removeEventListener(`keydown`, escKeyDownHandler);
@@ -78,7 +76,7 @@ const renderBoard = (boardComponent, tasks) => {
     }
   };
 
-  loadMoreButtonComponent.getElement().addEventListener(`click`, loadMoreButtonComponentClickHandler);
+  loadMoreButtonComponent.setClickHandler(loadMoreButtonComponentClickHandler);
 };
 
 const siteMainElement = document.querySelector(`.main`);
