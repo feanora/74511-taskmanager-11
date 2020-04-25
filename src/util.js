@@ -34,19 +34,3 @@ export const getCheckedValue = (isChecked) => isChecked ? `checked` : ``;
 export const getAnswer = (flag) => flag ? `yes` : `no`;
 export const getMarkupClass = (flag, className) => flag ? className : ``;
 
-export const createElement = (template) => {
-  const newElement = document.createElement(`div`);
-  newElement.innerHTML = template;
-  return newElement.firstChild;
-};
-
-export const render = (container, element, place = RenderPosition.BEFOREEDN) => {
-  switch (place) {
-    case RenderPosition.AFTERBEGIN:
-      container.prepend(element);
-      break;
-    case RenderPosition.BEFOREEDN:
-      container.append(element);
-      break;
-  }
-};

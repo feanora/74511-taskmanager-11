@@ -10,7 +10,7 @@ import SortComponent from "./components/sort.js";
 import {generateFilters} from "./mock/filter.js";
 import {generateTasks} from "./mock/task";
 import {TasksCount} from "./const.js";
-import {render} from "./util.js";
+import {render} from "./utils/render.js";
 
 const renderTask = (taskListElement, task) => {
   const taskComponent = new TaskComponent(task);
