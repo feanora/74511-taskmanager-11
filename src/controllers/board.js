@@ -1,46 +1,16 @@
-import TaskComponent from "../components/task.js";
-import TaskEditComponent from "../components/task-edit.js";
+import TaskController from "./task.js";
 import NoTasksComponent from "../components/no-tasks.js";
 import SortComponent from "../components/sort.js";
 import TasksComponent from "../components/tasks.js";
 import LoadMoreButtonComponent from "../components/load-more-button.js";
-import {remove, render, replace} from "../utils/render.js";
+import {remove, render} from "../utils/render.js";
 import {TasksCount, SortType} from "../const.js";
 
-const renderTask = (taskListElement, task) => {
-  const taskComponent = new TaskComponent(task);
-  const taskEditComponent = new TaskEditComponent(task);
-
-  const replaceTaskToEdit = () => {
-    replace(taskEditComponent, taskComponent);
-  };
-
-  const replaceEditToTask = () => {
-    replace(taskComponent, taskEditComponent);
-  };
-
-  const escKeyDownHandler = (evt) => {
-    const isEscKey = evt.key === `Escape` || evt.key === `Esc`;
-    if (isEscKey) {
-      replaceEditToTask();
-      document.removeEventListener(`keydown`, escKeyDownHandler);
-    }
-  };
-  taskComponent.setEditButtonClickHandler(() => {
-    replaceTaskToEdit();
-    document.addEventListener(`keydown`, escKeyDownHandler);
-  });
-  taskEditComponent.setSubmitHandler((evt) => {
-    evt.preventDefault();
-    replaceEditToTask();
-    document.removeEventListener(`keydown`, escKeyDownHandler);
-  });
-  render(taskListElement, taskComponent);
-};
-
 const renderTaskList = (tasksContainer, tasks) => {
-  tasks.forEach((task) => {
-    renderTask(tasksContainer, task);
+  return tasks.map((task) => {
+    const taskController = new TaskController(tasksContainer);
+    taskController.render(task);
+    return taskController;
   });
 };
 
@@ -78,7 +48,7 @@ export default class BoardController {
       showingTasksCount += TasksCount.BY_BUTTON;
 
       tasks.slice(prevTasksCount, showingTasksCount).forEach((task) => {
-        renderTask(taskListElement, task);
+        renderTaskList(taskListElement, task);
       });
       if (showingTasksCount >= tasks.length) {
         remove(this._loadMoreButtonComponent);
