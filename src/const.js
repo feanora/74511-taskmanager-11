@@ -54,3 +54,8 @@ export const SortType = {
   DEFAULT: `default`
 };
 
+export const Mode = {
+  DEFAULT: `default`,
+  EDIT: `edit`
+};
+
