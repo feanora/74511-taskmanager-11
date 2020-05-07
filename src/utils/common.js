@@ -1,3 +1,5 @@
+import {SortType} from "../const.js";
+
 export const getRandomNumber = (max, min = 0) => {
   return Math.round(Math.random() * (max - min) + min);
 };
@@ -31,4 +33,23 @@ export const formatTime = (date) => {
 export const getCheckedValue = (isChecked) => isChecked ? `checked` : ``;
 export const getAnswer = (flag) => flag ? `yes` : `no`;
 export const getMarkupClass = (flag, className) => flag ? className : ``;
+export const getSaveButtonCondition = (isBlockSaveButton) => isBlockSaveButton ? `disabled` : ``;
 
+export const getSortedTasks = (tasks, sortType, from, to) => {
+  let sortedTasks = [];
+  const showingTasks = tasks.slice();
+
+  switch (sortType) {
+    case SortType.DATE_UP:
+      sortedTasks = showingTasks.sort((a, b) => a.dueDate - b.dueDate);
+      break;
+    case SortType.DATE_DOWN:
+      sortedTasks = showingTasks.sort((a, b) => b.dueDate - a.dueDate);
+      break;
+    case SortType.DEFAULT:
+      sortedTasks = showingTasks;
+      break;
+  }
+
+  return sortedTasks.slice(from, to);
+};
