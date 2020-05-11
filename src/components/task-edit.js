@@ -1,6 +1,6 @@
 import AbstractSmartComponent from "./abstract-smart-component.js";
-import {DAYS, MONTH_NAMES, COLORS} from "../const.js";
-import {formatTime, getCheckedValue, getAnswer, getMarkupClass, getSaveButtonCondition} from "../utils/common.js";
+import {DAYS, COLORS} from "../const.js";
+import {formatTime, formatDate, getCheckedValue, getAnswer, getMarkupClass, getSaveButtonCondition} from "../utils/common.js";
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 
@@ -78,7 +78,7 @@ const createTaskEditTemplate = (task, options = {}) => {
   const {isDateShowing, isRepeatingTask, activeRepeatingDays} = options;
   const isExpired = dueDate instanceof Date && dueDate < Date.now();
   const isBlockSaveButton = (isDateShowing && isRepeatingTask) || (isRepeatingTask && !isRepeating(activeRepeatingDays));
-  const date = (isDateShowing && dueDate) ? `${dueDate.getDate()} ${MONTH_NAMES[dueDate.getMonth()]}` : ``;
+  const date = (isDateShowing && dueDate) ? formatDate(dueDate) : ``;
   const time = (isDateShowing && dueDate) ? formatTime(dueDate) : ``;
 
   const colorsMarkup = createColorsMarkup(COLORS, color);
