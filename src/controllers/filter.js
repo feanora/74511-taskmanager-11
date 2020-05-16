@@ -42,7 +42,6 @@ export default class FilterController {
   }
 
   _filterChangeHandler() {
-    this._tasksModel.setFilter(filterType);
     this._activeFilterType = filterType;
   }
 
