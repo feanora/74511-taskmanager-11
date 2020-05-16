@@ -1,7 +1,14 @@
-import {FILTER_NAMES} from "../const.js";
 import {getRandomNumber} from "../utils/common.js";
 
 const MAX_FILTER_TASK_COUNT = 10;
+const FILTER_NAMES = [
+  `all`,
+  `overdue`,
+  `today`,
+  `favorites`,
+  `repeating`,
+  `archive`
+];
 
 const generateFilters = () => {
   return FILTER_NAMES.map((it) => {

@@ -9,14 +9,15 @@ export const RenderPosition = {
   BEFOREEDN: `beforeend`
 };
 
-export const FILTER_NAMES = [
-  `all`,
-  `overdue`,
-  `today`,
-  `favorites`,
-  `repeating`,
-  `archive`,
-];
+export const FilterType = {
+  ALL: `all`,
+  OVERDUE: `overdue`,
+  TODAY: `today`,
+  FAVORITES: `favorites`,
+  REPEATING: `repeating`,
+  ARCHIVE: `archive`
+};
+
 export const DAYS = [
   `mo`,
   `tu`,
@@ -26,6 +27,7 @@ export const DAYS = [
   `sa`,
   `su`
 ];
+
 export const MONTH_NAMES = [
   `January`,
   `February`,
@@ -40,6 +42,7 @@ export const MONTH_NAMES = [
   `November`,
   `December`
 ];
+
 export const COLORS = [
   `black`,
   `yellow`,
