@@ -3,6 +3,8 @@ import TaskEditComponent from "../components/task-edit.js";
 import {render, replace, remove} from "../utils/render.js";
 import {Mode} from "../const.js";
 
+export const emptyTask = {};
+
 export default class TaskController {
   constructor(container, dataChangeHandler, viewChangeHandler) {
     this._container = container;
