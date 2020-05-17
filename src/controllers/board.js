@@ -37,6 +37,7 @@ export default class BoardController {
     this._sortComponent.setSortTypeChangeHandler(this._sortTypeChangeHandler);
     this._tasksModel.setFilterChangeHandler(this._filterChangeHandler);
   }
+
   render() {
     const container = this._container.getElement();
     const tasks = this._tasksModel.getTasks();
@@ -88,13 +89,10 @@ export default class BoardController {
 
   _sortTypeChangeHandler(sortType) {
     this._showingTasksCount = TasksCount.ON_START;
-
     const sortedTasks = getSortedTasks(this._tasksModel.getTasks(), sortType, 0, this._showingTasksCount);
-    const taskListElement = this._tasksComponent.getElement();
-    taskListElement.innerHTML = ``;
 
-    const newTasks = renderTaskList(taskListElement, sortedTasks, this._dataChangeHandler, this._viewChangeHandler);
-    this._showedTaskControllers = newTasks;
+    this._removeTasks();
+    this._renderTasks(sortedTasks);
 
     this._renderLoadMoreButton();
   }
