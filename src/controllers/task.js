@@ -1,6 +1,6 @@
 import TaskComponent from "../components/task.js";
 import TaskEditComponent from "../components/task-edit.js";
-import {render, replace} from "../utils/render.js";
+import {render, replace, remove} from "../utils/render.js";
 import {Mode} from "../const.js";
 
 export default class TaskController {
@@ -57,17 +57,27 @@ export default class TaskController {
       this._replaceEditToTask();
     }
   }
+
+  destroy() {
+    remove(this._taskEditComponent);
+    remove(this._taskComponent);
+    document.removeEventListener(`keydown`, this._escKeyDownHandler);
+
+  }
+
   _replaceTaskToEdit() {
     this._viewChangeHandler();
     replace(this._taskEditComponent, this._taskComponent);
     this._mode = Mode.EDIT;
   }
+
   _replaceEditToTask() {
     document.removeEventListener(`keydown`, this._escKeyDownHandler);
     this._taskEditComponent.reset();
     replace(this._taskComponent, this._taskEditComponent);
     this._mode = Mode.DEFAULT;
   }
+
   _escKeyDownHandler(evt) {
     const isEscKey = evt.key === `Escape` || evt.key === `Esc`;
     if (isEscKey) {
