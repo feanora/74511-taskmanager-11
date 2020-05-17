@@ -29,6 +29,7 @@ export default class BoardController {
     this._loadMoreButtonComponent = new LoadMoreButtonComponent();
 
     this._dataChangeHandler = this._dataChangeHandler.bind(this);
+    this._loadMoreButtonClickHandler = this._loadMoreButtonClickHandler.bind(this);
     this._sortTypeChangeHandler = this._sortTypeChangeHandler.bind(this);
     this._viewChangeHandler = this._viewChangeHandler.bind(this);
     this._filterChangeHandler = this._filterChangeHandler.bind(this);
@@ -76,20 +77,7 @@ export default class BoardController {
     const container = this._container.getElement();
     render(container, this._loadMoreButtonComponent);
 
-    this._loadMoreButtonComponent.setClickHandler(() => {
-      const prevTasksCount = this._showingTasksCount;
-      const tasks = this._tasksModel.getTasks();
-      const taskListElement = this._tasksComponent.getElement();
-      this._showingTasksCount += TasksCount.BY_BUTTON;
-
-      const sortedTasks = getSortedTasks(tasks, this._sortComponent.getSortType(), prevTasksCount, this._showingTasksCount);
-      const newTasks = renderTaskList(taskListElement, sortedTasks, this._dataChangeHandler, this._viewChangeHandler);
-      this._showedTaskControllers = this._showedTaskControllers.concat(newTasks);
-
-      if (this._showingTasksCount >= this._tasksModel.getTasks().length) {
-        remove(this._loadMoreButtonComponent);
-      }
-    });
+    this._loadMoreButtonComponent.setClickHandler(this._loadMoreButtonClickHandler);
   }
 
   _updateTasks(count) {
@@ -111,6 +99,19 @@ export default class BoardController {
     this._renderLoadMoreButton();
   }
 
+  _loadMoreButtonClickHandler() {
+    const prevTasksCount = this._showingTasksCount;
+    const tasks = this._tasksModel.getTasks();
+    this._showingTasksCount += TasksCount.BY_BUTTON;
+
+    const sortedTasks = getSortedTasks(tasks, this._sortComponent.getSortType(), prevTasksCount, this._showingTasksCount);
+    this._renderTasks(sortedTasks);
+
+    if (this._showingTasksCount >= sortedTasks.length) {
+      remove(this._loadMoreButtonComponent);
+    }
+  }
+
   _dataChangeHandler(taskController, oldData, newData) {
     const isSuccess = this._tasksModel.updateTask(oldData.id, newData);
 
@@ -127,3 +128,4 @@ export default class BoardController {
     this._updateTasks(TasksCount.ON_START);
   }
 }
+
