@@ -43,13 +43,15 @@ export const MONTH_NAMES = [
   `December`
 ];
 
-export const COLORS = [
-  `black`,
-  `yellow`,
-  `blue`,
-  `green`,
-  `pink`
-];
+export const Colors = {
+  BLACK: `black`,
+  YELLOW: `yellow`,
+  BLUE: `blue`,
+  GREEN: `green`,
+  PINK: `pink`
+};
+
+export const COLORS = Object.values(Colors);
 
 export const SortType = {
   DATE_DOWN: `date-down`,
