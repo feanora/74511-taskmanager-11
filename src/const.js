@@ -43,7 +43,7 @@ export const MONTH_NAMES = [
   `December`
 ];
 
-export const Colors = {
+export const Color = {
   BLACK: `black`,
   YELLOW: `yellow`,
   BLUE: `blue`,
@@ -51,7 +51,7 @@ export const Colors = {
   PINK: `pink`
 };
 
-export const COLORS = Object.values(Colors);
+export const COLORS = Object.values(Color);
 
 export const SortType = {
   DATE_DOWN: `date-down`,
@@ -60,7 +60,19 @@ export const SortType = {
 };
 
 export const Mode = {
+  ADDING: `adding`,
   DEFAULT: `default`,
   EDIT: `edit`
+};
+
+export const MenuItem = {
+  NEW_TASK: `control__new-task`,
+  STATISTICS: `control__statistic`,
+  TASKS: `control__task`
+};
+
+export const DescriptionLength = {
+  MIN: 1,
+  MAX: 140
 };
 

@@ -4,7 +4,7 @@ import SortComponent from "../components/sort.js";
 import TasksComponent from "../components/tasks.js";
 import LoadMoreButtonComponent from "../components/load-more-button.js";
 import {remove, render} from "../utils/render.js";
-import {TasksCount, Mode as TaskControllerMode} from "../const.js";
+import {TasksCount, Mode as TaskControllerMode, EmptyTask} from "../const.js";
 import {getSortedTasks} from "../utils/common.js";
 
 const renderTaskList = (tasksContainer, tasks, dataChangeHandler, viewChangeHandler) => {
@@ -27,6 +27,7 @@ export default class BoardController {
     this._sortComponent = new SortComponent();
     this._tasksComponent = new TasksComponent();
     this._loadMoreButtonComponent = new LoadMoreButtonComponent();
+    this._creatingTask = null;
 
     this._dataChangeHandler = this._dataChangeHandler.bind(this);
     this._loadMoreButtonClickHandler = this._loadMoreButtonClickHandler.bind(this);
@@ -53,6 +54,16 @@ export default class BoardController {
 
     this._renderTasks(tasks.slice(0, this._showingTasksCount));
     this._renderLoadMoreButton();
+  }
+
+  _createTask() {
+    if (this._creatingTask) {
+      return;
+    }
+
+    const taskListElement = this._tasksComponent.getElement();
+    this._creatingTask = new TaskController(taskListElement, this._dataChangeHandler(), this._viewChangeHandler());
+    this._creatingTask.render(EmptyTask, TaskControllerMode.ADDING);
   }
 
   _removeTasks() {
