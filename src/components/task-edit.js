@@ -3,6 +3,7 @@ import {DAYS, COLORS, DescriptionLength} from "../const.js";
 import {formatTime, formatDate, getCheckedValue, getAnswer, getMarkupClass, getSaveButtonCondition, isRepeating, isOverdueDate} from "../utils/common.js";
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
+import {encode} from "he";
 
 const isAllowableDescriptionLength = (description) => {
   const length = description.length;
@@ -77,11 +78,16 @@ const getRepeatDaysFieldset = (isRepeatingTask, repeatingDaysMarkup) => {
 
 const createTaskEditTemplate = (task, options = {}) => {
   const {dueDate, color} = task;
-  const {isDateShowing, isRepeatingTask, activeRepeatingDays, activeColor, currentDescription: description} = options;
+  const {isDateShowing, isRepeatingTask, activeRepeatingDays, activeColor, currentDescription} = options;
+
+  const description = encode(currentDescription);
+
   const isExpired = dueDate instanceof Date && isOverdueDate(dueDate, new Date());
   const isBlockSaveButton = (isDateShowing && isRepeatingTask) || (isRepeatingTask && !isRepeating(activeRepeatingDays)) || !isAllowableDescriptionLength(description);
+
   const date = (isDateShowing && dueDate) ? formatDate(dueDate) : ``;
   const time = (isDateShowing && dueDate) ? formatTime(dueDate) : ``;
+
   const cardColorClass = (cardColor) => cardColor ? activeColor : color;
 
   const colorsMarkup = createColorsMarkup(COLORS, color);
@@ -281,7 +287,6 @@ export default class TaskEdit extends AbstractSmartComponent {
     if (cardColors) {
       cardColors.addEventListener(`change`, (evt) => {
         this._activeColor = evt.target.value;
-
         this.rerender();
       });
     }

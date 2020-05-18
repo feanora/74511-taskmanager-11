@@ -1,10 +1,10 @@
-import TaskController, {emptyTask} from "./task.js";
+import TaskController, {EmptyTask} from "./task.js";
 import NoTasksComponent from "../components/no-tasks.js";
 import SortComponent from "../components/sort.js";
 import TasksComponent from "../components/tasks.js";
 import LoadMoreButtonComponent from "../components/load-more-button.js";
 import {remove, render} from "../utils/render.js";
-import {TasksCount, Mode as TaskControllerMode, EmptyTask} from "../const.js";
+import {TasksCount, Mode as TaskControllerMode} from "../const.js";
 import {getSortedTasks} from "../utils/common.js";
 
 const renderTaskList = (tasksContainer, tasks, dataChangeHandler, viewChangeHandler) => {
@@ -122,7 +122,7 @@ export default class BoardController {
   }
 
   _dataChangeHandler(taskController, oldData, newData) {
-    if (oldData === emptyTask) {
+    if (oldData === EmptyTask) {
       this._creatingTask = null;
       if (newData === null) {
         taskController.destroy();
