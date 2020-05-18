@@ -1,5 +1,4 @@
 import AbstractComponent from "./abstract-component.js";
-import {MenuItem} from "../const.js";
 
 const createSiteMenuTemplate = () => {
   return (
