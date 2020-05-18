@@ -9,14 +9,15 @@ export const RenderPosition = {
   BEFOREEDN: `beforeend`
 };
 
-export const FILTER_NAMES = [
-  `all`,
-  `overdue`,
-  `today`,
-  `favorites`,
-  `repeating`,
-  `archive`,
-];
+export const FilterType = {
+  ALL: `all`,
+  OVERDUE: `overdue`,
+  TODAY: `today`,
+  FAVORITES: `favorites`,
+  REPEATING: `repeating`,
+  ARCHIVE: `archive`
+};
+
 export const DAYS = [
   `mo`,
   `tu`,
@@ -26,6 +27,7 @@ export const DAYS = [
   `sa`,
   `su`
 ];
+
 export const MONTH_NAMES = [
   `January`,
   `February`,
@@ -40,13 +42,16 @@ export const MONTH_NAMES = [
   `November`,
   `December`
 ];
-export const COLORS = [
-  `black`,
-  `yellow`,
-  `blue`,
-  `green`,
-  `pink`
-];
+
+export const Color = {
+  BLACK: `black`,
+  YELLOW: `yellow`,
+  BLUE: `blue`,
+  GREEN: `green`,
+  PINK: `pink`
+};
+
+export const COLORS = Object.values(Color);
 
 export const SortType = {
   DATE_DOWN: `date-down`,
@@ -55,7 +60,19 @@ export const SortType = {
 };
 
 export const Mode = {
+  ADDING: `adding`,
   DEFAULT: `default`,
   EDIT: `edit`
+};
+
+export const MenuItem = {
+  NEW_TASK: `control__new-task`,
+  STATISTICS: `control__statistic`,
+  TASKS: `control__task`
+};
+
+export const DescriptionLength = {
+  MIN: 1,
+  MAX: 140
 };
 
