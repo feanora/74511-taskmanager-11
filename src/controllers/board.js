@@ -10,7 +10,7 @@ import {getSortedTasks} from "../utils/common.js";
 const renderTaskList = (tasksContainer, tasks, dataChangeHandler, viewChangeHandler) => {
   return tasks.map((task) => {
     const taskController = new TaskController(tasksContainer, dataChangeHandler, viewChangeHandler);
-    taskController.render(task);
+    taskController.render(task, TaskControllerMode.DEFAULT);
     return taskController;
   });
 };
